@@ -1,38 +1,43 @@
 package mangolost.vertxstudy.entity;
 
+import io.vertx.ext.sql.ResultSet;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
  * Created by chen.li200 on 2018-03-19
  */
-public class Student implements Serializable {
+public class Employee implements Serializable {
 
-    public static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private Integer id; //主键id
     private Timestamp create_time; //记录创建时间
     private Timestamp update_time; //记录更新时间
-    private String note; //备注
-
-    private String number; //学号
-    private String name;//姓名
+    private Integer record_status; //记录状态
+    private String employee_no; //工号
+    private String employee_name;//姓名
     private Integer age; //年龄
 
-    public Student() {
-        super();
+    public Employee() {
+
     }
 
-    public Student(Integer id, Timestamp create_time, Timestamp update_time, String note, String number, String name, Integer age) {
-        super();
+    public Employee(ResultSet rs) {
+        this.id = rs.getNumRows();
+        this.employee_no = rs.getColumnNames().get(0);
+    }
+
+    public Employee(Integer id, Timestamp create_time, Timestamp update_time, Integer record_status, String employee_no, String employee_name, Integer age) {
         this.id = id;
         this.create_time = create_time;
         this.update_time = update_time;
-        this.note = note;
-        this.number = number;
-        this.name = name;
+        this.record_status = record_status;
+        this.employee_no = employee_no;
+        this.employee_name = employee_name;
         this.age = age;
     }
 
@@ -60,28 +65,28 @@ public class Student implements Serializable {
         this.update_time = update_time;
     }
 
-    public String getNote() {
-        return note;
+    public Integer getRecord_status() {
+        return record_status;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setRecord_status(Integer record_status) {
+        this.record_status = record_status;
     }
 
-    public String getNumber() {
-        return number;
+    public String getEmployee_no() {
+        return employee_no;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
     }
 
-    public String getName() {
-        return name;
+    public String getEmployee_name() {
+        return employee_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployee_name(String employee_name) {
+        this.employee_name = employee_name;
     }
 
     public Integer getAge() {

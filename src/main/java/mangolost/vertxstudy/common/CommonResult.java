@@ -1,5 +1,7 @@
 package mangolost.vertxstudy.common;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -7,16 +9,22 @@ import java.io.Serializable;
  */
 public class CommonResult implements Serializable {
 
-    public static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private int code = 200;
     private String message = "OK";
-    private Object data;
+    private Object data = null;
     private long ts = System.currentTimeMillis();
 
-    public void setCodeAndMessage(int code, String message) {
+    public CommonResult() {
+
+    }
+
+    public CommonResult(int code, String message, Object data, long ts) {
         this.code = code;
         this.message = message;
+        this.data = data;
+        this.ts = ts;
     }
 
     public int getCode() {
@@ -39,8 +47,9 @@ public class CommonResult implements Serializable {
         return data;
     }
 
-    public void setData(Object data) {
+    public CommonResult setData(Object data) {
         this.data = data;
+        return this;
     }
 
     public long getTs() {
@@ -51,14 +60,20 @@ public class CommonResult implements Serializable {
         this.ts = ts;
     }
 
+    /**
+     *
+     * @param code
+     * @param message
+     * @return
+     */
+    public CommonResult setCodeAndMessage(int code, String message) {
+        this.code = code;
+        this.message = message;
+        return this;
+    }
 
     @Override
     public String toString() {
-        return "CommonResult{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                ", ts=" + ts +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }
